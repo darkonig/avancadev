@@ -19,7 +19,7 @@ type Result struct {
 }
 
 func init() {
-	err := godotenv.Load()
+	err := godotenv.Load("e.env")
 	if err != nil {
 		log.Fatal("Error loading .env")
 	}
