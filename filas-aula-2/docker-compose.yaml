@@ -12,3 +12,40 @@ services:
     ports:
       - "15672:15672"
       - "5672:5672"
+        #    networks:
+        #      - netw
+
+  fullcycle-a:
+    build: a/.
+    ports:
+      - "9090:9090"
+    links:
+      - rabbit
+        #    networks:
+        #      - netw
+    environment:
+      - RABBITMQ_DEFAULT_HOST=rabbit
+
+  fullcycle-b:
+    build: b/.
+    ports:
+      - "9091:9091"
+    links:
+      - rabbit
+      - fullcycle-c
+        #    networks:
+        #      - netw
+    environment:
+      - RABBITMQ_DEFAULT_HOST=rabbit
+      - SERVICE_C_URL=fullcycle-c
+
+  fullcycle-c:
+    build: c/.
+    ports:
+      - "9092:9092"
+        #    networks:
+        #      - netw
+
+        #networks:
+        #  netw:
+        #    driver: bridge

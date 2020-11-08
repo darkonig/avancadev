@@ -10,6 +10,7 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"os"
 )
 
 type Result struct {
@@ -58,7 +59,8 @@ func process(msg amqp.Delivery) {
 	order := NewOrder()
 	json.Unmarshal(msg.Body, &order)
 
-	resultCoupon := makeHttpCall("http://localhost:9092", order.Coupon)
+	serviceUrl := os.Getenv("SERVICE_C_URL")
+	resultCoupon := makeHttpCall("http://"+serviceUrl+":9092", order.Coupon)
 
 	switch resultCoupon.Status {
 	case InvalidCoupon:

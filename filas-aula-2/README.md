@@ -6,3 +6,7 @@ This repository has 4 services:
 - C: checks if coupon is valid (valid coupon == abc)
 
 ![screenshot](./service-b-output.png)
+
+
+Frontend runs on http://localhost:9090
+RabbitMQ admin runs on http://localhost:15672
